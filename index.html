@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dyana 🤍</title>
+  <title>Dyana</title>
   <meta name="description" content="Uma cartinha pra Dyana." />
 
   <style>
@@ -50,7 +50,7 @@
       background:
         radial-gradient(1000px 600px at 50% 35%, rgba(107,209,255,.20), transparent 60%),
         linear-gradient(180deg, var(--bg1), var(--bg2));
-      transition: opacity .8s ease, transform .8s ease;
+      transition: opacity .9s ease, transform .9s ease;
     }
     .intro.hide{
       opacity:0;
@@ -218,7 +218,7 @@
     }
     .modal.show{ display:grid; }
     .paper{
-      width:min(760px, 100%);
+      width:min(780px, 100%);
       background: rgba(8,18,40,.92);
       border: 1px solid rgba(255,255,255,.16);
       border-radius: 22px;
@@ -331,7 +331,7 @@
       to{ transform: translateY(110vh) rotate(520deg); opacity: 1; }
     }
 
-    /* ===== TELA FINAL (OPÇÃO B) ===== */
+    /* ===== TELA FINAL ===== */
     .final{
       position:fixed; inset:0;
       display:none;
@@ -346,7 +346,7 @@
     }
     .final.show{ display:grid; }
     .finalCard{
-      width:min(820px, 100%);
+      width:min(860px, 100%);
       border-radius: 26px;
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.14);
@@ -387,7 +387,7 @@
     }
     .finalTitle{
       margin:0;
-      font-size: clamp(28px, 4.4vw, 48px);
+      font-size: clamp(28px, 4.2vw, 44px);
       letter-spacing:-.02em;
       text-shadow: 0 18px 40px rgba(0,0,0,.45);
     }
@@ -405,26 +405,33 @@
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
       filter: drop-shadow(0 0 18px rgba(107,209,255,.10));
     }
+    .finalGif{
+      width:min(420px, 82vw);
+      height:auto;
+      border-radius: 18px;
+      box-shadow: 0 18px 55px rgba(0,0,0,.35);
+      animation: float 3.2s ease-in-out infinite;
+    }
   </style>
 </head>
 
 <body>
   <div class="stars"></div>
 
-  <!-- Música (coloque music.mp3 no repo) -->
+  <!-- Música -->
   <audio id="bgm" src="music.mp3" preload="auto" loop></audio>
 
   <!-- Intro -->
   <section class="intro" id="intro">
     <div class="introCard">
-      <img class="introGif" src="cinnamonroll.gif" alt="Cinnamonroll (intro)" />
-      <h1 class="introTitle">Dyana 🤍</h1>
+      <img class="introGif" src="Cinnamonroll.gif" alt="Cinnamonroll (intro)" />
+      <h1 class="introTitle">Dyana</h1>
       <p class="introHint">
         Eu fiz uma surpresa pra você.<br/>
-        (Se o som não começar, toca no botão abaixo.)
+        Se o som não começar, toque em “Começar”.
       </p>
       <div class="btnRow">
-        <button class="primary" id="startBtn">Começar ✨</button>
+        <button class="primary" id="startBtn">Começar</button>
         <button class="ghost" id="muteBtn">Som: desligar</button>
       </div>
     </div>
@@ -441,18 +448,17 @@
 
         <div class="heroBody">
           <img class="banner" src="pucca.jpg" alt="Imagem romântica" />
-          <h1>Uma cartinha pra você 🤍</h1>
+          <h1>Uma cartinha pra você</h1>
           <p class="sub">
-            Fofo e do nosso jeitinho.<br/>
-            Quando você estiver pronta, abre.
+            Quando você estiver pronta, abra.
           </p>
 
           <div class="btnRow">
-            <button class="primary" id="openLetter">Abrir cartinha 💌</button>
+            <button class="primary" id="openLetter">Abrir cartinha</button>
             <button class="ghost" id="toggleSound">Som: desligar</button>
           </div>
 
-          <div class="footer">com carinho e amor ✨</div>
+          <div class="footer">com carinho</div>
         </div>
       </div>
     </div>
@@ -475,10 +481,10 @@
         <p>Talvez isso não seja a forma que você imaginou seu pedido de namoro, mas venho aqui lhe perguntar humildemente:</p>
 
         <div class="question">
-          <h2>Você quer namorar comigo? 🤍</h2>
+          <h2>Você quer namorar comigo?</h2>
           <div class="btnRow">
-            <button class="primary" id="yes">Sim 💖</button>
-            <button class="ghost" id="no">Eu preciso pensar… 🙈</button>
+            <button class="primary" id="yes">Sim</button>
+            <button class="ghost" id="no">Eu preciso pensar</button>
           </div>
           <div class="resp" id="response"></div>
         </div>
@@ -489,32 +495,33 @@
   <!-- Overlay se autoplay falhar -->
   <div class="tap" id="tap">
     <div class="tapCard">
-      <h3>Toque para ativar o som 🎵</h3>
+      <h3>Toque para ativar o som</h3>
       <p>
-        Alguns celulares bloqueiam música automática.<br/>
-        É só tocar aqui uma vez e pronto.
+        Alguns navegadores bloqueiam música automática.<br/>
+        É só tocar aqui uma vez.
       </p>
       <button class="primary" id="tapPlay">Ativar som</button>
-      <div class="footer" style="margin-top:10px;">(isso não estraga a surpresa)</div>
+      <div class="footer" style="margin-top:10px;"> </div>
     </div>
   </div>
 
   <!-- Confete -->
   <div class="confetti" id="confetti"></div>
 
-  <!-- Tela final (Opção B) -->
+  <!-- Tela final -->
   <div class="final" id="final">
     <div class="finalCard">
       <div class="finalTop">
-        <div class="finalBadge">Agora é oficial 🤍</div>
+        <div class="finalBadge"> </div>
         <div class="date" id="today2"></div>
       </div>
       <div class="finalBody">
-        <h1 class="finalTitle">Eu tô muito feliz 😭💖</h1>
+        <h1 class="finalTitle">Eu estou muito feliz</h1>
         <p class="finalText">
-          Agora você é oficialmente minha pessoa favorita 🤍<br/>
-          E eu prometo te escolher todos os dias.
+          Prometo te amar, te honrar e te fazer feliz.<br/>
+          Você sempre estará em meu coração ❤️
         </p>
+        <img class="finalGif" src="Cinnamonroll.gif" alt="Cinnamonroll (final)" />
         <img class="finalImg" src="pucca.jpg" alt="Imagem romântica" />
       </div>
     </div>
@@ -589,10 +596,10 @@
     }
     startBtn.addEventListener("click", goToMain);
 
-    // intro como “cena”: auto-avança após 3.5s
+    // Intro mais longa (8 segundos)
     setTimeout(()=> {
       if(!intro.classList.contains("hide")) goToMain();
-    }, 3500);
+    }, 8000);
 
     function openModal(){
       modal.classList.add("show");
@@ -608,11 +615,11 @@
     modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
     window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
 
-    // botão "não" fofo
+    // botão "Eu preciso pensar" (mensagens sem emoji)
     const noTexts = [
-      "Tá bom… eu espero. Mas eu vou continuar te escolhendo do mesmo jeito 🤍",
-      "Tudo bem… eu só queria te dizer que você é muito importante pra mim 🥺",
-      "Ok… mas você ainda é minha pessoa favorita 😌"
+      "Tudo bem. Eu espero com carinho.",
+      "Sem pressa. Eu só queria que você soubesse o quanto você é importante pra mim.",
+      "Eu entendo. Eu vou continuar cuidando de você do mesmo jeito."
     ];
     let noCount = 0;
     no.addEventListener("mouseenter", ()=>{
@@ -632,7 +639,7 @@
       confetti.innerHTML = "";
       confetti.classList.add("show");
       const colors = ["#6bd1ff","#ff4da6","#b6f0ff","#a88bff","#ffffff"];
-      const pieces = 170;
+      const pieces = 180;
 
       for(let i=0;i<pieces;i++){
         const p = document.createElement("div");
@@ -645,18 +652,14 @@
         p.style.height = (Math.random()*10 + 10) + "px";
         confetti.appendChild(p);
       }
-      setTimeout(()=> confetti.classList.remove("show"), 3800);
+      setTimeout(()=> confetti.classList.remove("show"), 4200);
     }
 
-    // ✅ SIM -> fecha carta, confete e tela final (Opção B)
+    // SIM -> fecha carta, confete e tela final (mesmo link)
     yes.addEventListener("click", async ()=>{
-      // garante que o áudio fique tocando (agora foi um gesto do usuário)
       try { bgm.muted = false; await bgm.play(); } catch(e) {}
-
       closeModal();
       launchConfetti();
-
-      // pequena pausa pra ficar “cinema”
       setTimeout(()=> final.classList.add("show"), 420);
     });
 
