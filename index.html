@@ -45,7 +45,7 @@ body{
   pointer-events:none;
 }
 .intro img{
-  width:300px;
+  width:280px;
   animation:float 3s infinite ease-in-out;
 }
 @keyframes float{
@@ -54,7 +54,6 @@ body{
 }
 .intro h1{
   font-size:32px;
-  text-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
 /* MAIN */
@@ -77,6 +76,11 @@ body{
   box-shadow:0 20px 60px rgba(0,0,0,.4);
   backdrop-filter:blur(12px);
 }
+.cinna{
+  width:200px;
+  margin-bottom:15px;
+  animation:float 3s infinite ease-in-out;
+}
 button{
   padding:12px 22px;
   border:none;
@@ -84,6 +88,7 @@ button{
   cursor:pointer;
   font-weight:bold;
   transition:.2s;
+  margin-top:10px;
 }
 .primary{
   background:linear-gradient(135deg,#6bd1ff,#ff4da6);
@@ -161,6 +166,7 @@ button{
 <!-- MAIN -->
 <div class="main" id="main">
   <div class="card">
+    <img src="./cinnamonroll.gif" class="cinna" alt="Cinnamoroll">
     <h2>sábado, 28 de fevereiro de 2026</h2>
     <button class="primary" id="open">Abrir cartinha</button>
   </div>
