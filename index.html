@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Dyana</title>
-  <meta name="description" content="Uma cartinha pra Dyana." />
 
   <style>
     :root{
@@ -275,6 +274,7 @@
       margin-top:10px;
       color: var(--muted);
       font-size: 14px;
+      min-height: 18px;
     }
 
     /* Overlay autoplay bloqueado */
@@ -331,7 +331,7 @@
       to{ transform: translateY(110vh) rotate(520deg); opacity: 1; }
     }
 
-    /* ===== TELA FINAL ===== */
+    /* TELA FINAL (SEM GIF) */
     .final{
       position:fixed; inset:0;
       display:none;
@@ -370,14 +370,6 @@
       background: linear-gradient(135deg, rgba(107,209,255,.14), rgba(255,77,166,.10));
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .finalBadge{
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      background: rgba(107,209,255,.10);
-      border: 1px solid rgba(107,209,255,.18);
-      color: rgba(255,255,255,.90);
-    }
     .finalBody{
       padding: 18px;
       display:grid;
@@ -405,13 +397,6 @@
       box-shadow: 0 18px 55px rgba(0,0,0,.35);
       filter: drop-shadow(0 0 18px rgba(107,209,255,.10));
     }
-    .finalGif{
-      width:min(420px, 82vw);
-      height:auto;
-      border-radius: 18px;
-      box-shadow: 0 18px 55px rgba(0,0,0,.35);
-      animation: float 3.2s ease-in-out infinite;
-    }
   </style>
 </head>
 
@@ -419,12 +404,12 @@
   <div class="stars"></div>
 
   <!-- Música -->
-  <audio id="bgm" src="music.mp3" preload="auto" loop></audio>
+  <audio id="bgm" src="./music.mp3" preload="auto" loop></audio>
 
-  <!-- Intro -->
+  <!-- Intro (10s) -->
   <section class="intro" id="intro">
     <div class="introCard">
-      <img class="introGif" src="cinnamonroll.gif" alt="Cinnamonroll (intro)" />
+      <img class="introGif" src="./cinnamonroll.gif" alt="Cinnamoroll (intro)" />
       <h1 class="introTitle">Dyana</h1>
       <p class="introHint">
         Eu fiz uma surpresa pra você.<br/>
@@ -447,11 +432,9 @@
         </div>
 
         <div class="heroBody">
-          <img class="banner" src="pucca.jpg" alt="Imagem romântica" />
+          <img class="banner" src="./pucca.jpg" alt="Imagem romântica" />
           <h1>Uma cartinha pra você</h1>
-          <p class="sub">
-            Quando você estiver pronta, abra.
-          </p>
+          <p class="sub">Quando você estiver pronta, abra.</p>
 
           <div class="btnRow">
             <button class="primary" id="openLetter">Abrir cartinha</button>
@@ -501,18 +484,17 @@
         É só tocar aqui uma vez.
       </p>
       <button class="primary" id="tapPlay">Ativar som</button>
-      <div class="footer" style="margin-top:10px;"> </div>
     </div>
   </div>
 
   <!-- Confete -->
   <div class="confetti" id="confetti"></div>
 
-  <!-- Tela final -->
+  <!-- Tela final (SEM GIF) -->
   <div class="final" id="final">
     <div class="finalCard">
       <div class="finalTop">
-        <div class="finalBadge"> </div>
+        <div class="badge"> </div>
         <div class="date" id="today2"></div>
       </div>
       <div class="finalBody">
@@ -521,17 +503,16 @@
           Prometo te amar, te honrar e te fazer feliz.<br/>
           Você sempre estará em meu coração ❤️
         </p>
-        <img class="finalGif" src="cinnamonroll.gif" alt="Cinnamonroll (final)" />
-        <img class="finalImg" src="pucca.jpg" alt="Imagem romântica" />
+        <img class="finalImg" src="./pucca.jpg" alt="Imagem romântica" />
       </div>
     </div>
   </div>
 
   <script>
-    // Data
+    // Data fixa: amanhã (28/02/2026)
     const fixedDate = "sábado, 28 de fevereiro de 2026";
-document.getElementById("today").textContent = fixedDate;
-document.getElementById("today2").textContent = fixedDate;
+    document.getElementById("today").textContent = fixedDate;
+    document.getElementById("today2").textContent = fixedDate;
 
     const bgm = document.getElementById("bgm");
 
@@ -595,10 +576,10 @@ document.getElementById("today2").textContent = fixedDate;
     }
     startBtn.addEventListener("click", goToMain);
 
-    // Intro mais longa (8 segundos)
+    // Intro mais longa (10 segundos)
     setTimeout(()=> {
       if(!intro.classList.contains("hide")) goToMain();
-    }, 8000);
+    }, 10000);
 
     function openModal(){
       modal.classList.add("show");
@@ -614,7 +595,7 @@ document.getElementById("today2").textContent = fixedDate;
     modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
     window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
 
-    // botão "Eu preciso pensar" (mensagens sem emoji)
+    // Botão "Eu preciso pensar" (sem emoji)
     const noTexts = [
       "Tudo bem. Eu espero com carinho.",
       "Sem pressa. Eu só queria que você soubesse o quanto você é importante pra mim.",
