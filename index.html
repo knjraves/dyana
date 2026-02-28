@@ -529,10 +529,9 @@
 
   <script>
     // Data
-    const d = new Date();
-    const fmt = new Intl.DateTimeFormat("pt-BR", { dateStyle: "full" });
-    document.getElementById("today").textContent = fmt.format(d);
-    document.getElementById("today2").textContent = fmt.format(d);
+    const fixedDate = "sábado, 28 de fevereiro de 2026";
+document.getElementById("today").textContent = fixedDate;
+document.getElementById("today2").textContent = fixedDate;
 
     const bgm = document.getElementById("bgm");
 
