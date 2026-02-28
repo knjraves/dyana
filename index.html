@@ -1,246 +1,437 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Dyana</title>
 
 <style>
-body{
-  margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:linear-gradient(180deg,#04122e,#0a3a92);
-  color:white;
-  overflow:hidden;
-}
+  :root{
+    --bg1:#04122e;
+    --bg2:#0a3a92;
+    --c1:rgba(107,209,255,.25);
+    --c2:rgba(255,77,166,.18);
+    --card:rgba(255,255,255,.08);
+    --border:rgba(255,255,255,.14);
+    --shadow:0 20px 60px rgba(0,0,0,.40);
+    --text:rgba(255,255,255,.95);
+    --muted:rgba(255,255,255,.75);
+  }
 
-/* Fundo mágico */
-.glow{
-  position:fixed;
-  inset:0;
-  background:
-  radial-gradient(circle at 30% 30%,rgba(107,209,255,.25),transparent 60%),
-  radial-gradient(circle at 70% 20%,rgba(255,77,166,.18),transparent 60%);
-  filter:blur(40px);
-  animation:move 12s infinite alternate ease-in-out;
-}
-@keyframes move{
-  from{transform:translate(-2%,-2%)}
-  to{transform:translate(2%,2%)}
-}
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family:"Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    background:linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:var(--text);
+    overflow:hidden;
+  }
 
-/* INTRO */
-.intro{
-  position:fixed;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:20px;
-  transition:opacity 1s ease;
-}
-.intro.hide{
-  opacity:0;
-  pointer-events:none;
-}
-.intro img{
-  width:280px;
-  animation:float 3s infinite ease-in-out;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
-}
-.intro h1{
-  font-size:32px;
-}
+  /* Fundo mágico */
+  .glow{
+    position:fixed;
+    inset:-10%;
+    background:
+      radial-gradient(circle at 30% 30%, var(--c1), transparent 60%),
+      radial-gradient(circle at 70% 20%, var(--c2), transparent 60%);
+    filter:blur(40px);
+    animation:move 12s infinite alternate ease-in-out;
+    pointer-events:none;
+    z-index:0;
+  }
+  @keyframes move{
+    from{ transform:translate(-2%,-2%) scale(1.02); }
+    to{ transform:translate(2%,2%) scale(1.06); }
+  }
 
-/* MAIN */
-.main{
-  display:none;
-  height:100vh;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-  gap:15px;
-}
-.main.show{
-  display:flex;
-}
-.card{
-  background:rgba(255,255,255,.08);
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-  backdrop-filter:blur(12px);
-}
-.cinna{
-  width:200px;
-  margin-bottom:15px;
-  animation:float 3s infinite ease-in-out;
-}
-button{
-  padding:12px 22px;
-  border:none;
-  border-radius:14px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:.2s;
-  margin-top:10px;
-}
-.primary{
-  background:linear-gradient(135deg,#6bd1ff,#ff4da6);
-  color:#021;
-}
-.primary:hover{transform:scale(1.05)}
-.ghost{
-  background:rgba(255,255,255,.2);
-  color:white;
-}
+  @keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-14px); }
+  }
 
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  background:rgba(0,0,0,.6);
-}
-.modal.show{display:flex;}
-.paper{
-  background:#0c1f40;
-  padding:25px;
-  border-radius:20px;
-  max-width:600px;
-  animation:open .4s ease forwards;
-}
-@keyframes open{
-  from{transform:scale(.9);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
+  /* INTRO */
+  .intro{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    z-index:10;
+    transition:opacity 1s ease;
+  }
+  .intro.hide{
+    opacity:0;
+    pointer-events:none;
+  }
+  .introCard{
+    width:min(760px,92vw);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(12px);
+    padding:22px 18px;
+    text-align:center;
+  }
+  .intro img{
+    width:280px;
+    height:auto;
+    animation:float 3s infinite ease-in-out;
+    filter:drop-shadow(0 18px 45px rgba(0,0,0,.35));
+  }
+  .intro h1{
+    margin:10px 0 0;
+    font-size:clamp(26px,4vw,34px);
+    letter-spacing:-.02em;
+    text-shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  .intro p{
+    margin:8px 0 0;
+    color:var(--muted);
+    line-height:1.45;
+    font-size:14px;
+  }
 
-/* FINAL */
-.final{
-  position:fixed;
-  inset:0;
-  display:none;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  text-align:center;
-  background:linear-gradient(180deg,#04122e,#0a3a92);
-}
-.final.show{display:flex;}
-.final h1{
-  font-size:48px;
-  margin-bottom:15px;
-}
-.confetti{
-  position:fixed;
-  width:10px;
-  height:14px;
-  top:-10px;
-  animation:fall linear forwards;
-}
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(720deg)}
-}
+  /* MAIN */
+  .main{
+    position:relative;
+    z-index:5;
+    height:100%;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:16px;
+  }
+  .main.show{ display:flex; }
+
+  .card{
+    width:min(720px,92vw);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(12px);
+    padding:24px 18px;
+  }
+  .cinna{
+    width:200px;
+    height:auto;
+    animation:float 3s infinite ease-in-out;
+    margin-bottom:12px;
+    filter:drop-shadow(0 18px 45px rgba(0,0,0,.35));
+  }
+  .date{
+    margin:6px 0 14px;
+    font-size:14px;
+    color:var(--muted);
+  }
+
+  .btnRow{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:10px;
+  }
+
+  button{
+    padding:12px 22px;
+    border:none;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:800;
+    transition:transform .12s ease, filter .2s ease;
+    font-size:15px;
+  }
+  button:active{ transform:translateY(1px) scale(.99); }
+
+  .primary{
+    background:linear-gradient(135deg,#6bd1ff,#ff4da6);
+    color:#04122e;
+  }
+  .primary:hover{ filter:brightness(1.05); }
+  .ghost{
+    background:rgba(255,255,255,.18);
+    color:white;
+    border:1px solid rgba(255,255,255,.12);
+  }
+
+  /* MODAL (CARTA) */
+  .modal{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.62);
+    z-index:20;
+    padding:16px;
+  }
+  .modal.show{ display:flex; }
+
+  .paper{
+    width:min(720px,94vw);
+    background:#0c1f40;
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:20px;
+    padding:22px 18px;
+    box-shadow:0 30px 110px rgba(0,0,0,.55);
+    animation:open .35s ease forwards;
+    text-align:left;
+    line-height:1.65;
+    overflow:auto;
+    max-height:86vh;
+  }
+  @keyframes open{
+    from{ transform:scale(.94); opacity:0; }
+    to{ transform:scale(1); opacity:1; }
+  }
+
+  .paperTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .paperTitle{
+    font-weight:900;
+    letter-spacing:-.01em;
+  }
+  .x{
+    width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:rgba(255,255,255,.14);
+    cursor:pointer;
+    user-select:none;
+    font-weight:900;
+  }
+
+  .paper img{
+    width:150px;
+    height:auto;
+    display:block;
+    margin:0 auto 12px auto;
+    animation:float 3s infinite ease-in-out;
+    filter:drop-shadow(0 18px 45px rgba(0,0,0,.35));
+  }
+  .paper p{ margin:0 0 10px; }
+  .paper b{ color:rgba(255,255,255,.98); }
+
+  .question{
+    margin-top:12px;
+    padding:14px;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    border:1px dashed rgba(255,255,255,.22);
+    text-align:center;
+  }
+  .question h3{
+    margin:0 0 10px;
+    font-size:20px;
+    letter-spacing:-.02em;
+  }
+  #resp{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:14px;
+    min-height:18px;
+  }
+
+  /* FINAL */
+  .final{
+    position:fixed;
+    inset:0;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    z-index:30;
+    padding:16px;
+    background:linear-gradient(180deg,var(--bg1),var(--bg2));
+  }
+  .final.show{ display:flex; }
+
+  .finalCard{
+    width:min(760px,92vw);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:0 30px 120px rgba(0,0,0,.60);
+    backdrop-filter:blur(12px);
+    padding:26px 18px;
+  }
+  .final h1{
+    margin:0 0 10px;
+    font-size:clamp(34px,5vw,54px);
+    letter-spacing:-.03em;
+    text-shadow:0 18px 45px rgba(0,0,0,.45);
+  }
+  .final p{
+    margin:6px 0 0;
+    color:rgba(255,255,255,.90);
+    line-height:1.6;
+    font-size:16px;
+  }
+  .finalImg{
+    width:280px;
+    height:auto;
+    margin-top:18px;
+    animation:float 3s infinite ease-in-out;
+    filter:drop-shadow(0 18px 45px rgba(0,0,0,.35));
+  }
+
+  /* Confete */
+  .confetti{
+    position:fixed;
+    top:-10px;
+    width:10px;
+    height:14px;
+    border-radius:3px;
+    z-index:40;
+    animation:fall linear forwards;
+  }
+  @keyframes fall{
+    to{ transform:translateY(110vh) rotate(720deg); }
+  }
 </style>
 </head>
 
 <body>
+  <div class="glow"></div>
 
-<div class="glow"></div>
+  <audio id="music" src="./music.mp3" loop preload="auto"></audio>
 
-<audio id="music" src="./music.mp3" loop></audio>
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <div class="introCard">
+      <img src="./cinnamonroll.gif" alt="Cinnamoroll" />
+      <h1>Uma cartinha para você</h1>
+      <p>Quando estiver pronta, a surpresa começa.</p>
+    </div>
+  </section>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  <img src="./cinnamonroll.gif" alt="Cinnamoroll">
-  <h1>Uma cartinha para você</h1>
-</div>
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <div class="card">
+      <img src="./cinnamonroll.gif" class="cinna" alt="Cinnamoroll" />
+      <div class="date">sábado, 28 de fevereiro de 2026</div>
+      <button class="primary" id="open">Abrir cartinha</button>
+    </div>
+  </main>
 
-<!-- MAIN -->
-<div class="main" id="main">
-  <div class="card">
-    <img src="./cinnamonroll.gif" class="cinna" alt="Cinnamoroll">
-    <h2>sábado, 28 de fevereiro de 2026</h2>
-    <button class="primary" id="open">Abrir cartinha</button>
+  <!-- MODAL (CARTA) -->
+  <div class="modal" id="modal">
+    <div class="paper" role="dialog" aria-modal="true">
+      <div class="paperTop">
+        <div class="paperTitle">Cartinha pra Dyana</div>
+        <div class="x" id="close">✕</div>
+      </div>
+
+      <img src="./cinnamonroll.gif" alt="Cinnamoroll" />
+
+      <p>Dyana, você não faz ideia de quantos sorrisos eu já dei só de pensar em você e em conversar com você.</p>
+      <p>Tu és a parte mais bonita da minha vida, cada pedacinho meu te ama por completo e te deseja em cada plano da vida.</p>
+      <p>Eu desejo o teu abraço todo dia, amo conversar todos os dias com você, eu durmo pensando em nós dois e imagino possíveis momentos juntos.</p>
+      <p>Eu quero te ter por perto mais que qualquer outra pessoa do mundo.</p>
+      <p><b>Eu te amo. De verdade. Eu te vejo.</b> E eu quero que isso que nós temos seja para sempre.</p>
+      <p>Talvez isso não seja a forma que você imaginou seu pedido de namoro, mas venho aqui lhe perguntar humildemente:</p>
+
+      <div class="question">
+        <h3>Você quer namorar comigo?</h3>
+        <div class="btnRow">
+          <button class="primary" id="yes">Sim</button>
+          <button class="ghost" id="no">Eu preciso pensar</button>
+        </div>
+        <div id="resp"></div>
+      </div>
+    </div>
   </div>
-</div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="paper">
-    <p>Dyana, você não faz ideia de quantos sorrisos eu já dei só de pensar em você e em conversar com você.</p>
-    <p>Tu és a parte mais bonita da minha vida, cada pedacinho meu te ama por completo e te deseja em cada plano da vida.</p>
-    <p>Eu desejo o teu abraço todo dia, amo conversar todos os dias com você, eu durmo pensando em nós dois e imagino possíveis momentos juntos.</p>
-    <p>Eu quero te ter por perto mais que qualquer outra pessoa do mundo.</p>
-    <p><b>Eu te amo. De verdade. Eu te vejo.</b> E eu quero que isso que nós temos seja para sempre.</p>
-    <p>Talvez isso não seja a forma que você imaginou seu pedido de namoro, mas venho aqui lhe perguntar humildemente:</p>
-    <h3>Você quer namorar comigo?</h3>
-    <button class="primary" id="yes">Sim</button>
-    <button class="ghost" id="no">Eu preciso pensar</button>
-    <p id="resp"></p>
-  </div>
-</div>
-
-<!-- FINAL -->
-<div class="final" id="final">
-  <h1>Eu estou muito feliz</h1>
-  <p>Prometo te amar, te honrar e te fazer feliz.</p>
-  <p>Você sempre estará em meu coração ❤️</p>
-</div>
+  <!-- FINAL -->
+  <section class="final" id="final">
+    <div class="finalCard">
+      <h1>Eu estou muito feliz</h1>
+      <p>Prometo te amar, te honrar e te fazer feliz.</p>
+      <p>Você sempre estará em meu coração ❤️</p>
+      <img class="finalImg" src="./final.gif" alt="Final" />
+    </div>
+  </section>
 
 <script>
-const intro=document.getElementById("intro");
-const main=document.getElementById("main");
-const modal=document.getElementById("modal");
-const final=document.getElementById("final");
-const music=document.getElementById("music");
+  const intro = document.getElementById("intro");
+  const main  = document.getElementById("main");
+  const modal = document.getElementById("modal");
+  const final = document.getElementById("final");
+  const music = document.getElementById("music");
 
-function fadeIn(){
-  music.volume=0;
-  music.play().catch(()=>{});
-  let v=0;
-  let i=setInterval(()=>{
-    if(v<0.6){v+=0.02;music.volume=v;}
-    else clearInterval(i);
-  },150);
-}
+  const openBtn  = document.getElementById("open");
+  const closeBtn = document.getElementById("close");
+  const yesBtn   = document.getElementById("yes");
+  const noBtn    = document.getElementById("no");
+  const resp     = document.getElementById("resp");
 
-setTimeout(()=>{
-  intro.classList.add("hide");
-  main.classList.add("show");
-  fadeIn();
-},10000);
-
-document.getElementById("open").onclick=()=>modal.classList.add("show");
-document.getElementById("no").onclick=()=>{
-  document.getElementById("resp").innerText=
-  "Tudo bem. Eu espero com carinho.";
-};
-document.getElementById("yes").onclick=()=>{
-  modal.classList.remove("show");
-  final.classList.add("show");
-  confetti();
-};
-
-function confetti(){
-  for(let i=0;i<150;i++){
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.background=["#6bd1ff","#ff4da6","#ffffff"][Math.floor(Math.random()*3)];
-    c.style.animationDuration=(Math.random()*2+2)+"s";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),4000);
+  // Música com fade-in
+  function fadeIn(){
+    music.volume = 0;
+    music.play().catch(()=>{});
+    let v = 0;
+    const t = setInterval(()=>{
+      v += 0.02;
+      music.volume = Math.min(0.6, v);
+      if(v >= 0.6) clearInterval(t);
+    }, 150);
   }
-}
-</script>
 
+  // Intro 10s
+  setTimeout(()=>{
+    intro.classList.add("hide");
+    main.classList.add("show");
+    fadeIn();
+  }, 10000);
+
+  // Abrir/fechar carta
+  openBtn.onclick = ()=> {
+    modal.classList.add("show");
+    resp.textContent = "";
+  };
+  closeBtn.onclick = ()=> modal.classList.remove("show");
+  modal.addEventListener("click", (e)=>{ if(e.target === modal) modal.classList.remove("show"); });
+  window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") modal.classList.remove("show"); });
+
+  // "Não" (resposta discreta)
+  noBtn.onclick = ()=> {
+    resp.textContent = "Tudo bem. Eu espero com carinho.";
+  };
+
+  // Confete
+  function confetti(){
+    const colors = ["#6bd1ff","#ff4da6","#ffffff"];
+    for(let i=0;i<160;i++){
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = (Math.random()*100) + "vw";
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.animationDuration = (Math.random()*2 + 2) + "s";
+      document.body.appendChild(c);
+      setTimeout(()=> c.remove(), 4200);
+    }
+  }
+
+  // SIM -> final
+  yesBtn.onclick = ()=>{
+    modal.classList.remove("show");
+    confetti();
+    final.classList.add("show");
+  };
+</script>
 </body>
 </html>
